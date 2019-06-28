@@ -1,7 +1,14 @@
 var firebaseConfig = {
-}
-
-firebase.initializeApp(firebaseConfig)
+    apiKey: "AIzaSyBJY3Jwq0EhAbRtoESRx6Fs0CuJkvLQYAQ",
+    authDomain: "trainscheduler-6075a.firebaseapp.com",
+    databaseURL: "https://trainscheduler-6075a.firebaseio.com",
+    projectId: "trainscheduler-6075a",
+    storageBucket: "trainscheduler-6075a.appspot.com",
+    messagingSenderId: "475604701440",
+    appId: "1:475604701440:web:9fcc7805781767c2"
+  }
+  
+  firebase.initializeApp(firebaseConfig)
 
  
  // Assumptions
