@@ -37,6 +37,8 @@ $("#add-train-btn").on("click", function(event) {
     return false
 })
 
+
+// Having major issues with moment errors
 database.ref().on("child_added", function(snapshot){
     newRow = $("<tr>");
     newRow.append("<td>" + snapshot.val().trainName + "</th>")
