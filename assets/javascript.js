@@ -7,36 +7,31 @@ var firebaseConfig = {
     messagingSenderId: "475604701440",
     appId: "1:475604701440:web:9fcc7805781767c2"
   }
-  
-  firebase.initializeApp(firebaseConfig)
 
- 
- // Assumptions
- var tFrequency = 3;
+firebase.initializeApp(firebaseConfig)
 
- // Time is 3:30 AM
- var firstTime = "03:30";
+var database = firebase.database()
 
- // First Time (pushed back 1 year to make sure it comes before current time)
- var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
- console.log(firstTimeConverted);
+$("#add-train-btn").on("click", function(event) {
+    event.preventDefault()
 
- // Current Time
- var currentTime = moment();
- console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+    var newTrain = $("#train-name-input").val().trim()
+    var newDestination = $("#destination-input").val().trim()
+    var newTime = $("#start-time-input").val().trim()
+    var newFrequency = $("#rate-input").val().trim()
 
- // Difference between the times
- var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
- console.log("DIFFERENCE IN TIME: " + diffTime);
+    database.ref().push({
+        trainName: newTrain,
+        trainDestination: newDestination,
+        trainTime: newTime,
+        trainFrequency: newFrequency,
+    })
 
- // Time apart (remainder)
- var tRemainder = diffTime % tFrequency;
- console.log(tRemainder);
+    $("#train-name-input").val("")
+    $("#destination-input").val("")
+    $("#start-time-input").val("")
+    $("#rate-input").val("")
 
- // Minute Until Train
- var tMinutesTillTrain = tFrequency - tRemainder;
- console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+    return false
 
- // Next Train
- var nextTrain = moment().add(tMinutesTillTrain, "minutes");
- console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+})
